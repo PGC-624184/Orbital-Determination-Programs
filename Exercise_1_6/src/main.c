@@ -30,22 +30,18 @@ int main(int argc, char *argv[]) {
     
     read_data(fp, result, MAX_ROWS);
 
-    for (int i=0; i<MAX_ROWS;i++) {
-        printf("Time: %f, Rho %f \n", result[i][0], result[i][1]);
-    }
-
     float state[5] = {1.5, 10.0, 2.2, 0.5, 0.3};
     
     float rho[5];
-    float rhoDot[5];
+    //float rhoDot[5];
     float A_X, A_Y;
     
     for (int i=0; i<MAX_ROWS;i++) {
         A_X = state[0] - 1.0 + state[2] * (float)i;
         A_Y = state[1] - 1.0 + state[3] * (float)i - 0.5 * state[4] * (float)i *  (float)i;
         rho[i] = sqrt(A_X*A_X + A_Y*A_Y);
-        rhoDot[i] = 1/rho[i]*(A_X*state[2]+A_Y*state[3]);
-        printf("At time %d the state difference is:\t %g \n",i, (result[i][1] - rho[i])/rhoDot[i]);
+        //rhoDot[i] = 1/rho[i]*(A_X*state[2]+A_Y*state[3]);
+        printf("Predicted:\t %g \t Actual: %g\n",rho[i],result[i][1]);
     }
 
     return 0;
